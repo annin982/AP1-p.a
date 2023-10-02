@@ -1,12 +1,10 @@
 from abc import ABC, abstractmethod
 
-# Interface para representar um documento
 class Documento(ABC):
     @abstractmethod
     def abrir(self) -> str:
         pass
 
-# Subclasses concretas de Documento (produtos concretos)
 class DocumentoPDF(Documento):
     def abrir(self) -> str:
         return "Abrindo documento PDF..."
@@ -19,13 +17,11 @@ class DocumentoTexto(Documento):
     def abrir(self) -> str:
         return "Abrindo documento de texto..."
 
-# Interface para criadores de documentos (criador abstrato)
 class FabricaDeDocumentos(ABC):
     @abstractmethod
     def criar_documento(self) -> Documento:
         pass
 
-# Subclasses concretas de FabricaDeDocumentos (criadores concretos)
 class FabricaPDF(FabricaDeDocumentos):
     def criar_documento(self) -> Documento:
         return DocumentoPDF()
@@ -38,7 +34,6 @@ class FabricaTexto(FabricaDeDocumentos):
     def criar_documento(self) -> Documento:
         return DocumentoTexto()
 
-# Função cliente para criar e abrir documentos
 def cliente_criar_e_abrir_documento(criador: FabricaDeDocumentos) -> None:
     documento = criador.criar_documento()
     print(f"Cliente: Criou e agora está abrindo um documento.\n{documento.abrir()}\n")
